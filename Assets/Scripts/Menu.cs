@@ -13,8 +13,10 @@ public class Menu : MonoBehaviour
     public bool High = false;
     public bool Back = false;
     //Choose Level
-    public bool Level_1 = false;
-    public bool Level_2 = false;
+    public bool Play = false;
+    public bool NextLevel = false;
+    public bool PrevLevel = false;
+    public int CurrentSceneIndex;
     //Cameras
     public Camera mainCamera;
     public Camera settingsCamera;    
@@ -26,7 +28,7 @@ public class Menu : MonoBehaviour
         settingsCamera.enabled = false;
         chooseLevelCamera.enabled = false;
     }
-
+    
     void OnMouseUp()
     {
         if (NewGame)
@@ -34,12 +36,32 @@ public class Menu : MonoBehaviour
             mainCamera.enabled = false;
             chooseLevelCamera.enabled = true;
         }
-        if (Level_1)
-            SceneManager.LoadScene(1);
-                    
-        if (Level_2)
-            SceneManager.LoadScene(2);
+        //Choose Level
+        if (Play)
+        {
+            SceneManager.LoadScene(CurrentSceneIndex);
+        }
+             
+
+        if (NextLevel)
+        {
+            if (chooseLevelCamera.transform.position.x < 35)
+            {
+                CurrentSceneIndex++;
+                chooseLevelCamera.transform.position = new Vector3(chooseLevelCamera.transform.position.x + 25f, 22.3f, 0.3f);
+            }
+        }
             
+        if (PrevLevel)
+        {
+            if(chooseLevelCamera.transform.position.x > 10)
+            {
+                CurrentSceneIndex--;
+                chooseLevelCamera.transform.position = new Vector3(chooseLevelCamera.transform.position.x - 25f, 22.3f, 0.3f);
+            }            
+        }
+            
+        //Settings
         if (Settings)
         {
             mainCamera.enabled = false;
