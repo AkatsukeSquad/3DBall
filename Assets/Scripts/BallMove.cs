@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class BallMove : MonoBehaviour
 {
 	public float ball_speed = 5f;
-	Rigidbody ball_rb;	
+	public Rigidbody ball_rb;	
 	public bool isGrounded = false;
     public bool Restart = false;
     public bool BackToMenu = false;
@@ -19,7 +19,7 @@ public class BallMove : MonoBehaviour
         restart_camera.enabled = false;
     }
 	// Update is called once per frame
-	void Update () {}
+	
 
     void OnMouseUp()
     {
@@ -80,4 +80,6 @@ public class BallMove : MonoBehaviour
 		SceneManager.LoadScene(3);
 	}
     
+    
+
 }

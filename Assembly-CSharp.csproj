@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BallMove.cs" />
      <Compile Include="Assets\Scripts\Cam.cs" />
+     <Compile Include="Assets\Scripts\Hadges.cs" />
      <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\TouchScreen.cs" />
  <Reference Include="UnityEditor.StandardEvents">
