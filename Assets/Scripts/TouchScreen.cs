@@ -6,8 +6,6 @@ public class TouchScreen : MonoBehaviour
 	public GameObject ball_gameObj;
     public Transform energy_capsule;
 	public Rigidbody ball_rb;
-    public bool Right = false;
-    public bool Left = false;
     
     float clicked = 0;
     float clicktime = 0;
@@ -22,23 +20,21 @@ public class TouchScreen : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(ball.Energy);
-        if (Left)
-            transform.position = new Vector3 (1f,2f, ball_gameObj.transform.position.z - 1f);
-        if (Right)
-            transform.position = new Vector3(3f, 2f, ball_gameObj.transform.position.z - 1f);
-
+        transform.position = new Vector3 (2f,2f, ball_gameObj.transform.position.z - 1f);
         energy_capsule.position = new Vector3(2f, 2.2f, ball_gameObj.transform.position.z - 1f);
         energy_capsule.localScale = new Vector3(0.05f, 1.25f * (ball.Energy / ball.MaxEnergy), 0.05f);            
     }
 
 	void OnMouseDrag()
-    {        
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 1.0f;
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         if (ball_rb.position.x > 0.5 && ball_rb.position.x < 3.5)
         {
-            if(Left)
+            if(worldPos.x < transform.localScale.x / 2)
                 ball_rb.MovePosition(ball_rb.position + Vector3.left * 3f * Time.deltaTime);
-            if(Right)
+            if(worldPos.x > transform.localScale.x / 2)
                 ball_rb.MovePosition(ball_rb.position + Vector3.right * 3f * Time.deltaTime);
         }
 
