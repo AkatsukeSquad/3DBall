@@ -2,7 +2,9 @@
 
 public class TouchScreen : MonoBehaviour
 {
+    public Ball ball = new Ball();
 	public GameObject ball_gameObj;
+    public Transform energy_capsule;
 	public Rigidbody ball_rb;
     public bool Right = false;
     public bool Left = false;
@@ -12,15 +14,22 @@ public class TouchScreen : MonoBehaviour
     float clickdelay = 0.5f;
 
     // Use this for initialization
-    void Start() { }
+    void Start()
+    {
+        ball.TimerStart();
+    }
 	
 	// Update is called once per frame
 	void Update ()
-    {        
+    {
+        Debug.Log(ball.Energy);
         if (Left)
             transform.position = new Vector3 (1f,2f, ball_gameObj.transform.position.z - 1f);
         if (Right)
-            transform.position = new Vector3(3f, 2f, ball_gameObj.transform.position.z - 1f);        
+            transform.position = new Vector3(3f, 2f, ball_gameObj.transform.position.z - 1f);
+
+        energy_capsule.position = new Vector3(2f, 2.2f, ball_gameObj.transform.position.z - 1f);
+        energy_capsule.localScale = new Vector3(0.05f, 1.25f * (ball.Energy / ball.MaxEnergy), 0.05f);            
     }
 
 	void OnMouseDrag()
@@ -44,6 +53,7 @@ public class TouchScreen : MonoBehaviour
         if (DoubleClick())
         {
             Physics.gravity = new Vector3(0, 0, 0);
+            ball.Energy = 50;
         }
     }
 
