@@ -28,13 +28,7 @@ public class BallMove : MonoBehaviour
         if (BackToMenu)
             SceneManager.LoadScene(0);
     }
-
-	void OnMouseDrag()
-	{
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        ball_rb.position = Vector3.MoveTowards(ball_rb.position, new Vector3(mousePos.x, ball_rb.position.y, ball_rb.position.z), ball_speed * Time.deltaTime);        
-    }
-
+    
 	public void Move()
 	{
         ball_rb.AddForce ((Vector3.up + Vector3.forward) * 200f);

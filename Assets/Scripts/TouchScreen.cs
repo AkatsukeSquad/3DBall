@@ -6,8 +6,7 @@ public class TouchScreen : MonoBehaviour
 	public Rigidbody ball_rb;
     public bool Right = false;
     public bool Left = false;
-
-    public bool click = false;
+    
     float clicked = 0;
     float clicktime = 0;
     float clickdelay = 0.5f;
@@ -17,26 +16,11 @@ public class TouchScreen : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update ()
-    {
-        if (DoubleClick())
-        {
-            Physics.gravity = new Vector3(0,0,0);
-        }
+    {        
         if (Left)
             transform.position = new Vector3 (1f,2f, ball_gameObj.transform.position.z - 1f);
         if (Right)
-            transform.position = new Vector3(3f, 2f, ball_gameObj.transform.position.z - 1f);
-        
-    }
-
-    void OnMouseDown()
-    {
-        click = true;
-    }
-
-    void OnMouseUp()
-    {
-        click = false;
+            transform.position = new Vector3(3f, 2f, ball_gameObj.transform.position.z - 1f);        
     }
 
 	void OnMouseDrag()
@@ -51,15 +35,21 @@ public class TouchScreen : MonoBehaviour
 
         else if (ball_rb.position.x <= 0.5)
             ball_rb.AddForce(Vector3.right * 1f);
-
         else if (ball_rb.position.x >= 3.5)
             ball_rb.AddForce(Vector3.left * 1f);
-        
+    }
+
+    void OnMouseDown()
+    {
+        if (DoubleClick())
+        {
+            Physics.gravity = new Vector3(0, 0, 0);
+        }
     }
 
     bool DoubleClick()
     {        
-        if (click)
+        if (Input.GetMouseButton(0))
         {
             clicked++;
             if (clicked == 1) clicktime = Time.time;
