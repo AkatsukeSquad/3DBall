@@ -40,7 +40,6 @@ public class Hadges : MonoBehaviour {
             platformSpeed = -0.05f;
         if (transform.position.x < 1f)
             platformSpeed = 0.05f;
-        Debug.Log("Moving");
         transform.position = new Vector3(transform.position.x + platformSpeed, transform.position.y, transform.position.z);
     }
 }
